@@ -9,3 +9,7 @@ private fun List<String>.toPiece() = when (this[0].toLowerCase()) {
     "king" -> Success(King(this[1]))
     else   -> TODO("Else needs to be implemented")
 }
+
+data class ParsingError(val input: String) : Error
+
+

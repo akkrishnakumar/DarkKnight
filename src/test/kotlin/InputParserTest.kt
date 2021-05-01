@@ -15,4 +15,14 @@ class InputParserTest {
 
         assertThat(actual, equalTo(expected))
     }
+
+    @Test
+    internal fun `should return Failure when input is not valid`() {
+        val input = "invalid input"
+        val expected = ParsingError(input)
+
+        val actual = parser(input)
+
+        assertThat(actual, equalTo(expected))
+    }
 }
