@@ -21,7 +21,7 @@ class InputParserTest {
         val input = "invalid input"
         val expected = ParsingError(input)
 
-        val actual = parser(input)
+        val actual = parser(input).failureValue()
 
         assertThat(actual, equalTo(expected))
     }
