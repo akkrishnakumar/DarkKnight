@@ -1,5 +1,6 @@
-typealias InputParser = (String) -> Piece
+typealias InputParser = (String) -> Result<Error, Piece>
 
-class DefaultInputParser: InputParser {
-    override fun invoke(p1: String): Piece = TODO("Need to implement parser")
+class DefaultInputParser : InputParser {
+    override fun invoke(input: String): Result<Error, Piece> = TODO("Need to implement parser")
 }
+
