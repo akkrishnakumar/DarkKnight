@@ -11,7 +11,7 @@ class InputParserTest {
         val expected = King("D5")
         val input = "King D5"
 
-        val actual = parser(input)
+        val actual = parser(input).successValue()
 
         assertThat(actual, equalTo(expected))
     }
