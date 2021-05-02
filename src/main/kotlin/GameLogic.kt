@@ -14,10 +14,12 @@ class DefaultGameLogic(val rowNum: Int, val colNum: Int) : GameLogic {
             .flatMap { increment ->
                 val iterator = colNum * increment
                 directions
-                    .map { cells.getOrElse(it.formula(curr, iterator, increment), ::defaultValue) }
+                    .map { getCell(it.formula(curr, iterator, increment, moves.steps())) }
                     .filter { it != "" }
             }
     }
+
+    private fun getCell(index: Int) = cells.getOrElse(index, ::defaultValue)
 
     private fun Moves.steps() = when (this) {
         is Restricted -> steps
@@ -28,7 +30,7 @@ class DefaultGameLogic(val rowNum: Int, val colNum: Int) : GameLogic {
 
 }
 
-private fun Direction.formula(curr: Int, iterator: Int, increment: Int) = when (this) {
+private fun Direction.formula(curr: Int, iterator: Int, increment: Int, moves: Int) = when (this) {
     Direction.TL  -> curr + (iterator - increment)
     Direction.T   -> curr + iterator
     Direction.TR  -> curr + (iterator + increment)
@@ -37,8 +39,8 @@ private fun Direction.formula(curr: Int, iterator: Int, increment: Int) = when (
     Direction.BL  -> curr - (iterator + increment)
     Direction.B   -> curr - iterator
     Direction.BR  -> curr - (iterator - increment)
-    Direction.TLL -> TODO("Need to Implement")
-    Direction.TLR -> TODO("Need to Implement")
-    Direction.BLL -> TODO("Need to Implement")
-    Direction.BLR -> TODO("Need to Implement")
+    Direction.TLL -> (curr + (moves - increment) + iterator + 1)
+    Direction.TLR -> (curr - (moves - increment) + iterator - 1)
+    Direction.BLL -> (curr + (moves - increment) - iterator + 1)
+    Direction.BLR -> (curr - (moves - increment) - iterator - 1)
 }
