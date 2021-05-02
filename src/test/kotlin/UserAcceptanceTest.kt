@@ -16,8 +16,15 @@ class UserAcceptanceTest {
         assertThat(actual, equalTo(expected))
     }
 
+    @Test
+    fun `Knight can move 3 steps in a 'L' shape direction`() {
+        val expected = listOf("G4", "F5", "D5", "C4", "C2", "D1", "F1")
+        val input = "Knight E3"
 
+        val actual = board.showMoves(input).successValue()
 
+        assertThat(actual, equalTo(expected))
+    }
 
 }
 
