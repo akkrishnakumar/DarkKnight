@@ -6,8 +6,9 @@ class DefaultInputParser : InputParser {
 }
 
 private fun List<String>.toPiece() = when (this[0].toLowerCase()) {
-    "king" -> Success(King(this[1]))
-    else   -> Failure(ParsingError(this.joinToString(" ")))
+    "king"   -> Success(King(this[1]))
+    "knight" -> Success(Knight(this[1]))
+    else     -> Failure(ParsingError(this.joinToString(" ")))
 }
 
 data class ParsingError(val input: String) : Error
