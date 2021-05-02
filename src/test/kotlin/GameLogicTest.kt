@@ -13,7 +13,7 @@ class GameLogicTest {
 
         val actual = gameLogic(input)
 
-        assertThat(actual, equalTo(expected))
+        assertThat(actual, containsAllOf(expected))
     }
 
     @Test

@@ -1,5 +1,4 @@
 import com.natpryce.hamkrest.assertion.assertThat
-import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 
 class UserAcceptanceTest {
@@ -13,7 +12,7 @@ class UserAcceptanceTest {
         val input = "King D5"
         val actual = board.showMoves(input).successValue()
 
-        assertThat(actual, equalTo(expected))
+        assertThat(actual, containsAllOf(expected))
     }
 
     @Test
