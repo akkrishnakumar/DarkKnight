@@ -1,16 +1,13 @@
 interface Board {
-    fun showMoves(input: String): List<String>
+    fun showMoves(input: String): Result<Error, List<String>>
 }
 
 class DefaultBoard(
     rowNum: Int,
     colNum: Int,
+    val gameLogic: GameLogic = DefaultGameLogic(rowNum, colNum),
     val inputParser: InputParser = DefaultInputParser()
 ) : Board {
-
-    override fun showMoves(input: String): List<String> {
-        inputParser(input)
-        return TODO("Need to implement Game logic")
-    }
-
+    override fun showMoves(input: String): Result<Error, List<String>> =
+        inputParser(input).map(gameLogic)
 }
