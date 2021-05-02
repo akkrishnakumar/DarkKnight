@@ -8,7 +8,7 @@ fun containsAllOf(expected: List<String>) =
     object : Matcher<List<String>> {
 
         override fun invoke(actual: List<String>): MatchResult =
-            if (expected.containsAll(actual)) Match
+            if (expected.containsAll(actual) && expected.size == actual.size) Match
             else Mismatch("was ${describe(actual)}")
 
         override val description: String get() = "is equal to ${describe(expected)}"
