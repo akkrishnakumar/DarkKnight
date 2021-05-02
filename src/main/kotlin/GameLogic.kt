@@ -1,5 +1,3 @@
-import Direction.Direction
-
 typealias GameLogic = (Piece) -> List<String>
 
 class DefaultGameLogic(val rowNum: Int, val colNum: Int) : GameLogic {
@@ -31,12 +29,16 @@ class DefaultGameLogic(val rowNum: Int, val colNum: Int) : GameLogic {
 }
 
 private fun Direction.formula(curr: Int, iterator: Int, increment: Int) = when (this) {
-    Direction.TL -> curr + (iterator - increment)
-    Direction.T  -> curr + iterator
-    Direction.TR -> curr + (iterator + increment)
-    Direction.L  -> curr - (1 * increment)
-    Direction.R  -> curr + (1 * increment)
-    Direction.BL -> curr - (iterator + increment)
-    Direction.B  -> curr - iterator
-    Direction.BR -> curr - (iterator - increment)
+    Direction.TL  -> curr + (iterator - increment)
+    Direction.T   -> curr + iterator
+    Direction.TR  -> curr + (iterator + increment)
+    Direction.L   -> curr - (1 * increment)
+    Direction.R   -> curr + (1 * increment)
+    Direction.BL  -> curr - (iterator + increment)
+    Direction.B   -> curr - iterator
+    Direction.BR  -> curr - (iterator - increment)
+    Direction.TLL -> TODO("Need to Implement")
+    Direction.TLR -> TODO("Need to Implement")
+    Direction.BLL -> TODO("Need to Implement")
+    Direction.BLR -> TODO("Need to Implement")
 }

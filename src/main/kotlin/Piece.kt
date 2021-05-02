@@ -1,6 +1,3 @@
-import Direction.Direction
-import Direction.Direction.*
-
 sealed class Moves
 
 class Restricted(val steps: Int) : Moves()
@@ -13,5 +10,24 @@ sealed class Piece(val moves: Moves) {
 
 data class King(override val position: String) : Piece(Restricted(1)) {
     override val directions: List<Direction> =
-        listOf(T, TR, R, BR, B, BL, L, TL)
+        listOf(
+            Direction.T,
+            Direction.TR,
+            Direction.R,
+            Direction.BR,
+            Direction.B,
+            Direction.BL,
+            Direction.L,
+            Direction.TL
+        )
+}
+
+data class Knight(override val position: String) : Piece(Restricted(2)) {
+    override val directions: List<Direction> =
+        listOf(
+            Direction.TLL,
+            Direction.TLR,
+            Direction.BLL,
+            Direction.BLR
+        )
 }
