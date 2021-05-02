@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test
 
 class GameLogicTest {
 
-    val gameLogic = DefaultGameLogic()
+    val gameLogic = DefaultGameLogic(8, 8)
 
     @Test
     internal fun `should return possible moves for a given piece`() {
