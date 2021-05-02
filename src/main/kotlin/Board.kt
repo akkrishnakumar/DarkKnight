@@ -2,8 +2,15 @@ interface Board {
     fun showMoves(input: String): List<String>
 }
 
-class DefaultBoard(rowNum: Int, colNum: Int) : Board {
+class DefaultBoard(
+    rowNum: Int,
+    colNum: Int,
+    val inputParser: InputParser = DefaultInputParser()
+) : Board {
 
-    override fun showMoves(input: String): List<String> = TODO("Need to implement input parser")
+    override fun showMoves(input: String): List<String> {
+        inputParser(input)
+        return TODO("Need to implement Game logic")
+    }
 
 }
