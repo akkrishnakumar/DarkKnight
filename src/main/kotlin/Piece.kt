@@ -31,3 +31,17 @@ data class Knight(override val position: String) : Piece(Restricted(2)) {
             Direction.BLR
         )
 }
+
+data class Queen(override val position: String) : Piece(Unlimited) {
+    override val directions: List<Direction> =
+        listOf(
+            Direction.T,
+            Direction.TR,
+            Direction.R,
+            Direction.BR,
+            Direction.B,
+            Direction.BL,
+            Direction.L,
+            Direction.TL
+        )
+}
