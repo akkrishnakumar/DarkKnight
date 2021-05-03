@@ -9,3 +9,9 @@ Simple chess piece move predictor
 2. kotlin 1.4
 3. gradle 6.3
 ```
+
+## Running tests
+
+```gradle
+./gradlew clean test
+```
