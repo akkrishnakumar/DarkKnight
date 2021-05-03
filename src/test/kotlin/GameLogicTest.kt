@@ -39,4 +39,15 @@ class GameLogicTest {
 
         assertThat(actual, containsAllOf(expected))
     }
+
+    @Test
+    internal fun `should return possible moves for Knight in corner`() {
+        val expected = listOf("H4", "F4", "E1", "E3")
+        val input = Knight("G2")
+
+        val actual = gameLogic(input)
+
+        assertThat(actual, containsAllOf(expected))
+    }
+
 }
