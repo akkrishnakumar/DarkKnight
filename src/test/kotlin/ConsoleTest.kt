@@ -19,4 +19,16 @@ class ConsoleTest {
         assertThat(actual, equalTo(expected))
     }
 
+    @Test
+    internal fun `should print error message when invalid input was entered on the console`() {
+        val expected = "Invalid Input: Duke A0"
+        val input = "Duke A0"
+        val consoleApp = ConsoleApp({ input }, { console.push(it) })
+
+        consoleApp()
+        val actual = console.pop()
+
+        assertThat(actual, equalTo(expected))
+    }
+
 }
