@@ -10,6 +10,12 @@ Simple chess piece move predictor
 3. gradle 6.3
 ```
 
+## Running App
+
+```gradle
+./gradlew clean run
+```
+
 ## Running tests
 
 ```gradle
