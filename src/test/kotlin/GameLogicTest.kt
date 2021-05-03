@@ -56,7 +56,7 @@ class GameLogicTest {
             "E4", "E6", "C6", "C4",
             "F3", "F7", "B7", "B3",
             "G2", "G8", "A8", "A2",
-            //"H1"
+            "H1"
         )
         val input = Bishop("D5")
 

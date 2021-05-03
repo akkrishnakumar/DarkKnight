@@ -46,7 +46,12 @@ data class Queen(override val position: String) : Piece(Unlimited) {
         )
 }
 
-data class Bishop(override val position: String): Piece(Unlimited) {
+data class Bishop(override val position: String) : Piece(Unlimited) {
     override val directions: List<Direction> =
-        listOf()
+        listOf(
+            Direction.TR,
+            Direction.BR,
+            Direction.BL,
+            Direction.TL
+        )
 }
