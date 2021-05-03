@@ -67,5 +67,5 @@ data class Rook(override val position: String) : Piece(Unlimited) {
 }
 
 data class Pawn(override val position: String) : Piece(Restricted(1)) {
-    override val directions: List<Direction> = listOf()
+    override val directions: List<Direction> = listOf(Direction.T)
 }
