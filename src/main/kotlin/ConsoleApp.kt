@@ -1,6 +1,6 @@
 class ConsoleApp(
-    val input: () -> String,
-    val output: (String) -> Unit,
+    val input: () -> String = ::readInput,
+    val output: (String) -> Unit = ::printOutput,
     private val board: Board = DefaultBoard(8, 8)
 ) {
     operator fun invoke(): Unit = board.showMoves(input()).printResult()
@@ -14,4 +14,15 @@ class ConsoleApp(
         is ParsingError -> input
         else            -> ""
     }
+}
+
+private fun readInput(): String {
+    println(":::Welcome To DarkknighT:::")
+    println("Enter your piece along with the position:")
+    return readLine()!!
+}
+
+private fun printOutput(value: String) {
+    println(value)
+    println(":::::Thank You:::::")
 }
