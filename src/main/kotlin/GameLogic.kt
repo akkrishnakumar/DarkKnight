@@ -38,10 +38,10 @@ class DefaultGameLogic(val rowNum: Int, val colNum: Int) : GameLogic {
             Direction.BL  -> curr - (iterator + increment)
             Direction.B   -> curr - iterator
             Direction.BR  -> brCondition(curr, iterator, increment)
-            Direction.TLL -> (curr + (moves - increment) + iterator + 1)
-            Direction.TLR -> (curr - (moves - increment) + iterator - 1)
-            Direction.BLL -> (curr + (moves - increment) - iterator + 1)
-            Direction.BLR -> (curr - (moves - increment) - iterator - 1)
+            Direction.TLL -> ttlCondition(curr, iterator, increment, moves)
+            Direction.TLR -> ttrCondition(curr, iterator, increment, moves)
+            Direction.BLL -> bllCondition(curr, iterator, increment, moves)
+            Direction.BLR -> blrCondition(curr, iterator, increment, moves)
         }
 
     private fun leftEdgeCondition(curr: Int, increment: Int): Int {
@@ -62,6 +62,26 @@ class DefaultGameLogic(val rowNum: Int, val colNum: Int) : GameLogic {
     private fun tlCondition(curr: Int, iterator: Int, increment: Int): Int {
         val pos = curr + (iterator - increment)
         return if (pos == cells.size - 1) -1 else pos
+    }
+
+    private fun ttlCondition(curr: Int, iterator: Int, increment: Int, moves: Int): Int {
+        val pos = (curr - (moves - increment) + iterator - 1)
+        return if ((curr + iterator).row() == pos.row()) pos else -1
+    }
+
+    private fun ttrCondition(curr: Int, iterator: Int, increment: Int, moves: Int): Int {
+        val pos = (curr + (moves - increment) + iterator + 1)
+        return if ((curr + iterator).row() == pos.row()) pos else -1
+    }
+
+    private fun bllCondition(curr: Int, iterator: Int, increment: Int, moves: Int): Int {
+        val pos = (curr - (moves - increment) - iterator - 1)
+        return if ((curr - iterator).row() == pos.row()) pos else -1
+    }
+
+    private fun blrCondition(curr: Int, iterator: Int, increment: Int, moves: Int): Int {
+        val pos = (curr + (moves - increment) - iterator + 1)
+        return if ((curr - iterator).row() == pos.row()) pos else -1
     }
 
     private fun Int.row() = this / colNum
