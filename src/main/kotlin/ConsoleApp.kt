@@ -7,6 +7,11 @@ class ConsoleApp(
 
     private fun Result<Error, List<String>>.printResult() = when (this) {
         is Success -> output(value.joinToString(", "))
-        is Failure -> TODO()
+        is Failure -> output("Invalid Input: ${error.getErrorMessage()}")
+    }
+
+    private fun Error.getErrorMessage() = when (this) {
+        is ParsingError -> input
+        else            -> ""
     }
 }
