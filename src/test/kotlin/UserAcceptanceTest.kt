@@ -1,4 +1,5 @@
 import com.natpryce.hamkrest.assertion.assertThat
+import com.natpryce.hamkrest.equalTo
 import org.junit.jupiter.api.Test
 
 class UserAcceptanceTest {
@@ -25,5 +26,14 @@ class UserAcceptanceTest {
         assertThat(actual, containsAllOf(expected))
     }
 
+    @Test
+    fun `Show Error message when wrong input is entered`() {
+        val expected = ParsingError("Wrong Input")
+        val input = "Wrong Input"
+
+        val actual = board.showMoves(input).failureValue()
+
+        assertThat(actual, equalTo(expected))
+    }
 }
 
