@@ -55,3 +55,8 @@ data class Bishop(override val position: String) : Piece(Unlimited) {
             Direction.TL
         )
 }
+
+data class Rook(override val position: String): Piece(Unlimited) {
+    override val directions: List<Direction> =
+        listOf()
+}
