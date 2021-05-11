@@ -42,6 +42,21 @@ class UserAcceptanceTest {
     }
 
     @Test
+    fun `Bishop can move across the board only diagonally`() {
+        val expected = listOf(
+            "E4", "E6", "C6", "C4",
+            "F3", "F7", "B7", "B3",
+            "G2", "G8", "A8", "A2",
+            "H1"
+        )
+        val input = "Bishop D5"
+
+        val actual = board.showMoves(input).successValue()
+
+        assertThat(actual, containsAllOf(expected))
+    }
+
+    @Test
     fun `Show Error message when wrong input is entered`() {
         val expected = ParsingError("Wrong Input")
         val input = "Wrong Input"
