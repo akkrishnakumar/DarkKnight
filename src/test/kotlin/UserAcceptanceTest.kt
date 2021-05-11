@@ -72,6 +72,16 @@ class UserAcceptanceTest {
     }
 
     @Test
+    fun `Pawn can move only 1 step at a time, in the forward direction, vertically`() {
+        val expected =  listOf("E5")
+        val input = "Pawn D5"
+
+        val actual = board.showMoves(input).successValue()
+
+        assertThat(actual, containsAllOf(expected))
+    }
+
+    @Test
     fun `Show Error message when wrong input is entered`() {
         val expected = ParsingError("Wrong Input")
         val input = "Wrong Input"
