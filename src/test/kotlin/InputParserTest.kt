@@ -12,7 +12,10 @@ class InputParserTest {
 
     @ParameterizedTest
     @MethodSource("validInputCombinations")
-    internal fun `should return success result with Piece when input is valid`(input: String, expected: Piece) {
+    internal fun `should return success result with Piece when input is valid`(
+        input: String,
+        expected: Piece
+    ) {
         val actual = parser(input).successValue()
 
         assertThat(actual, equalTo(expected))
@@ -34,6 +37,7 @@ class InputParserTest {
         fun validInputCombinations() = listOf(
             of("King D5", King("D5")),
             of("Queen D5", Queen("D5")),
+            of("Bishop D5", Bishop("D5")),
         )
     }
 }
