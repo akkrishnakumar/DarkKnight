@@ -57,6 +57,21 @@ class UserAcceptanceTest {
     }
 
     @Test
+    fun `Rook can move across the board only vertically and horizontally`() {
+        val expected = listOf(
+            "E5", "F5", "G5", "H5",
+            "D6", "D7", "D8",
+            "C5", "B5", "A5",
+            "D4", "D3", "D2", "D1"
+        )
+        val input = "Rook D5"
+
+        val actual = board.showMoves(input).successValue()
+
+        assertThat(actual, containsAllOf(expected))
+    }
+
+    @Test
     fun `Show Error message when wrong input is entered`() {
         val expected = ParsingError("Wrong Input")
         val input = "Wrong Input"
