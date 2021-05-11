@@ -38,6 +38,7 @@ class InputParserTest {
             of("King D5", King("D5")),
             of("Queen D5", Queen("D5")),
             of("Bishop D5", Bishop("D5")),
+            of("Rook D5", Rook("D5"))
         )
     }
 }

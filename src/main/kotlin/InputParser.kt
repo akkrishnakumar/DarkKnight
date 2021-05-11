@@ -10,6 +10,7 @@ private fun List<String>.toPiece() = when (this[0].toLowerCase()) {
     "knight" -> Success(Knight(this[1]))
     "queen"  -> Success(Queen(this[1]))
     "bishop" -> Success(Bishop(this[1]))
+    "rook"   -> Success(Rook(this[1]))
     else     -> Failure(ParsingError(this.joinToString(" ")))
 }
 
