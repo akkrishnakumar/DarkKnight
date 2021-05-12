@@ -31,4 +31,15 @@ class ConsoleTest {
         assertThat(actual, equalTo(expected))
     }
 
+    @Test
+    internal fun `should print 'No possible moves' when no possible moves are found for a piece`() {
+        val expected = "No possible moves"
+        val input = "Queen A0"
+        val consoleApp = ConsoleApp({ input }, { console.push(it) })
+
+        consoleApp()
+        val actual = console.pop()
+
+        assertThat(actual, equalTo(expected))
+    }
 }
