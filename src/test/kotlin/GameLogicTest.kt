@@ -22,18 +22,10 @@ class GameLogicTest {
         assertThat(actual, containsAllOf(expected))
     }
 
-    @Test
-    internal fun `should return possible moves for Queen`() {
-        val expected = listOf(
-            "E5", "E6", "D6", "C6", "C5", "C4", "D4", "E4",
-            "F5", "F7", "D7", "B7", "B5", "B3", "D3", "F3",
-            "G5", "G8", "D8", "A8", "A5", "A2", "D2", "G2",
-            "H5", "D1", "H1"
-        )
-        val input = Queen("D5")
-
+    @ParameterizedTest
+    @MethodSource("possibleOutcomesForQueen")
+    internal fun `should return possible moves for Queen`(input: Piece, expected: List<String>) {
         val actual = gameLogic(input)
-
         assertThat(actual, containsAllOf(expected))
     }
 
@@ -96,6 +88,47 @@ class GameLogicTest {
             of(Knight("H1"), listOf("F2", "G3")),
             of(Knight("H8"), listOf("F7", "G6")),
         )
+
+        @JvmStatic
+        fun possibleOutcomesForQueen() = listOf(
+            of(
+                Queen("A1"), listOf(
+                    "B1", "C1", "D1", "E1", "F1", "G1", "H1",
+                    "A2", "A3", "A4", "A5", "A6", "A7", "A8",
+                    "B2", "C3", "D4", "E5", "F6", "G7", "H8"
+                )
+            ),
+            of(
+                Queen("A8"), listOf(
+                    "B8", "C8", "D8", "E8", "F8", "G8", "H8",
+                    "A1", "A2", "A3", "A4", "A5", "A6", "A7",
+                    "B7", "C6", "D5", "E4", "F3", "G2", "H1"
+                )
+            ),
+            of(
+                Queen("D5"), listOf(
+                    "E5", "E6", "D6", "C6", "C5", "C4", "D4", "E4",
+                    "F5", "F7", "D7", "B7", "B5", "B3", "D3", "F3",
+                    "G5", "G8", "D8", "A8", "A5", "A2", "D2", "G2",
+                    "H5", "D1", "H1"
+                )
+            ),
+            of(
+                Queen("H1"), listOf(
+                    "A1", "B1", "C1", "D1", "E1", "F1", "G1",
+                    "H2", "H3", "H4", "H5", "H6", "H7", "H8",
+                    "A8", "B7", "C6", "D5", "E4", "F3", "G2"
+                )
+            ),
+            of(
+                Queen("H8"), listOf(
+                    "A8", "B8", "C8", "D8", "E8", "F8", "G8",
+                    "H1", "H2", "H3", "H4", "H5", "H6", "H7",
+                    "A1", "B2", "C3", "D4", "E5", "F6", "G7"
+                )
+            )
+        )
+
     }
 
 }

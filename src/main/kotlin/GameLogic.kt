@@ -56,7 +56,8 @@ class DefaultGameLogic(val rowNum: Int, val colNum: Int) : GameLogic {
 
     private fun brCondition(curr: Int, iterator: Int, increment: Int): Int {
         val pos = curr - (iterator - increment)
-        return if ((curr - iterator).row() == pos.row() && pos != 0) pos else -1
+
+        return if ((curr - iterator) >= 0 && (curr - iterator).row() == pos.row() && pos != 0) pos else -1
     }
 
     private fun blCondition(curr: Int, iterator: Int, increment: Int): Int {
