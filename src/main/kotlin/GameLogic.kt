@@ -10,7 +10,8 @@ class DefaultGameLogic(val rowNum: Int, val colNum: Int) : GameLogic {
 
     private fun Piece.possibleMoves(): List<String> {
         val curr = cells.indexOf(position.toUpperCase())
-        return (1..moves.steps())
+        return if (curr == -1) emptyList()
+        else (1..moves.steps())
             .flatMap { increment ->
                 val iterator = colNum * increment
                 directions
