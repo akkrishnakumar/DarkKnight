@@ -29,18 +29,10 @@ class GameLogicTest {
         assertThat(actual, containsAllOf(expected))
     }
 
-    @Test
-    internal fun `should return possible moves for Bishop`() {
-        val expected = listOf(
-            "E4", "E6", "C6", "C4",
-            "F3", "F7", "B7", "B3",
-            "G2", "G8", "A8", "A2",
-            "H1"
-        )
-        val input = Bishop("D5")
-
+    @ParameterizedTest
+    @MethodSource("possibleOutcomesForBishop")
+    internal fun `should return possible moves for Bishop`(input: Piece, expected: List<String>) {
         val actual = gameLogic(input)
-
         assertThat(actual, containsAllOf(expected))
     }
 
@@ -121,6 +113,37 @@ class GameLogicTest {
             )
         )
 
+        @JvmStatic
+        fun possibleOutcomesForBishop() = listOf(
+            of(
+                Bishop("A1"), listOf(
+                    "B2", "C3", "D4", "E5", "F6", "G7", "H8"
+                )
+            ),
+            of(
+                Bishop("A8"), listOf(
+                    "B7", "C6", "D5", "E4", "F3", "G2", "H1"
+                )
+            ),
+            of(
+                Bishop("D5"), listOf(
+                    "E4", "E6", "C6", "C4",
+                    "F3", "F7", "B7", "B3",
+                    "G2", "G8", "A8", "A2",
+                    "H1"
+                )
+            ),
+            of(
+                Bishop("H1"), listOf(
+                    "A8", "B7", "C6", "D5", "E4", "F3", "G2"
+                )
+            ),
+            of(
+                Bishop("H8"), listOf(
+                    "A1", "B2", "C3", "D4", "E5", "F6", "G7"
+                )
+            )
+        )
 
         @JvmStatic
         fun possibleOutcomesForRook() = listOf(
