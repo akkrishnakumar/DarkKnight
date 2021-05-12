@@ -1,4 +1,5 @@
 import com.natpryce.hamkrest.assertion.assertThat
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.of
 import org.junit.jupiter.params.provider.MethodSource
@@ -46,6 +47,16 @@ class GameLogicTest {
     @MethodSource("possibleOutcomesForPawn")
     internal fun `should return possible moves for Pawn`(input: Piece, expected: List<String>) {
         val actual = gameLogic(input)
+        assertThat(actual, containsAllOf(expected))
+    }
+
+    @Test
+    internal fun `should return empty list if invalid position is provided`() {
+        val expected = emptyList<String>()
+        val input = Queen("A9")
+
+        val actual = gameLogic(input)
+
         assertThat(actual, containsAllOf(expected))
     }
 
