@@ -9,7 +9,7 @@ class DefaultGameLogic(val rowNum: Int, val colNum: Int) : GameLogic {
     override fun invoke(piece: Piece): List<String> = piece.possibleMoves()
 
     private fun Piece.possibleMoves(): List<String> {
-        val curr = cells.indexOf(position)
+        val curr = cells.indexOf(position.toUpperCase())
         return (1..moves.steps())
             .flatMap { increment ->
                 val iterator = colNum * increment
