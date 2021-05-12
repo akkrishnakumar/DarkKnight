@@ -1,17 +1,17 @@
 import com.natpryce.hamkrest.assertion.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments.of
+import org.junit.jupiter.params.provider.MethodSource
 
 class GameLogicTest {
 
     val gameLogic = DefaultGameLogic(8, 8)
 
-    @Test
-    internal fun `should return possible moves for King`() {
-        val expected = listOf("E5", "E6", "D6", "C6", "C5", "C4", "D4", "E4")
-        val input = King("D5")
-
+    @ParameterizedTest
+    @MethodSource("possibleOutcomesForKing")
+    internal fun `should return possible moves for King`(input: Piece, expected: List<String>) {
         val actual = gameLogic(input)
-
         assertThat(actual, containsAllOf(expected))
     }
 
@@ -88,6 +88,18 @@ class GameLogicTest {
         val actual = gameLogic(input)
 
         assertThat(actual, containsAllOf(expected))
+    }
+
+    companion object {
+
+        @JvmStatic
+        fun possibleOutcomesForKing() = listOf(
+            of(King("A1"), listOf("B1", "B2", "A2")),
+            of(King("A8"), listOf("B8", "B7", "A7")),
+            of(King("D5"), listOf("E5", "E6", "D6", "C6", "C5", "C4", "D4", "E4")),
+            of(King("H1"), listOf("H2", "G2", "G1")),
+            of(King("H8"), listOf("H7", "G7", "G8")),
+        )
     }
 
 }

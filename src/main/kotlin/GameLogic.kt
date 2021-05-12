@@ -32,10 +32,10 @@ class DefaultGameLogic(val rowNum: Int, val colNum: Int) : GameLogic {
         when (this) {
             Direction.TL  -> tlCondition(curr, iterator, increment)
             Direction.T   -> curr + iterator
-            Direction.TR  -> curr + (iterator + increment)
+            Direction.TR  -> trCondition(curr, iterator, increment)
             Direction.L   -> leftEdgeCondition(curr, increment)
             Direction.R   -> rightEdgeCondition(curr, increment)
-            Direction.BL  -> curr - (iterator + increment)
+            Direction.BL  -> blCondition(curr, iterator, increment)
             Direction.B   -> curr - iterator
             Direction.BR  -> brCondition(curr, iterator, increment)
             Direction.TLL -> ttlCondition(curr, iterator, increment, moves)
@@ -56,12 +56,22 @@ class DefaultGameLogic(val rowNum: Int, val colNum: Int) : GameLogic {
 
     private fun brCondition(curr: Int, iterator: Int, increment: Int): Int {
         val pos = curr - (iterator - increment)
-        return if (pos == 0) -1 else pos
+        return if ((curr - iterator).row() == pos.row() && pos != 0) pos else -1
+    }
+
+    private fun blCondition(curr: Int, iterator: Int, increment: Int): Int {
+        val pos = curr - (iterator + increment)
+        return if ((curr - iterator).row() == pos.row()) pos else -1
+    }
+
+    private fun trCondition(curr: Int, iterator: Int, increment: Int): Int {
+        val pos = curr + (iterator + increment)
+        return if ((curr + iterator).row() == pos.row()) pos else -1
     }
 
     private fun tlCondition(curr: Int, iterator: Int, increment: Int): Int {
         val pos = curr + (iterator - increment)
-        return if (pos == cells.size - 1) -1 else pos
+        return if (pos == cells.size - 1 || (curr + iterator).row() != pos.row()) -1 else pos
     }
 
     private fun ttlCondition(curr: Int, iterator: Int, increment: Int, moves: Int): Int {
