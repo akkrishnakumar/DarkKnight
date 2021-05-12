@@ -15,13 +15,10 @@ class GameLogicTest {
         assertThat(actual, containsAllOf(expected))
     }
 
-    @Test
-    internal fun `should return possible moves for Knight`() {
-        val expected = listOf("G4", "F5", "D5", "C4", "C2", "D1", "F1", "G2")
-        val input = Knight("E3")
-
+    @ParameterizedTest
+    @MethodSource("possibleOutcomesForKnight")
+    internal fun `should return possible moves for Knight`(input: Piece, expected: List<String>) {
         val actual = gameLogic(input)
-
         assertThat(actual, containsAllOf(expected))
     }
 
@@ -34,16 +31,6 @@ class GameLogicTest {
             "H5", "D1", "H1"
         )
         val input = Queen("D5")
-
-        val actual = gameLogic(input)
-
-        assertThat(actual, containsAllOf(expected))
-    }
-
-    @Test
-    internal fun `should return possible moves for Knight in corner`() {
-        val expected = listOf("H4", "F4", "E1", "E3")
-        val input = Knight("G2")
 
         val actual = gameLogic(input)
 
@@ -99,6 +86,15 @@ class GameLogicTest {
             of(King("D5"), listOf("E5", "E6", "D6", "C6", "C5", "C4", "D4", "E4")),
             of(King("H1"), listOf("H2", "G2", "G1")),
             of(King("H8"), listOf("H7", "G7", "G8")),
+        )
+
+        @JvmStatic
+        fun possibleOutcomesForKnight() = listOf(
+            of(Knight("A1"), listOf("C2", "B3")),
+            of(Knight("A8"), listOf("C7", "B6")),
+            of(Knight("E3"), listOf("G4", "F5", "D5", "C4", "C2", "D1", "F1", "G2")),
+            of(Knight("H1"), listOf("F2", "G3")),
+            of(Knight("H8"), listOf("F7", "G6")),
         )
     }
 

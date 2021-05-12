@@ -91,7 +91,7 @@ class DefaultGameLogic(val rowNum: Int, val colNum: Int) : GameLogic {
 
     private fun blrCondition(curr: Int, iterator: Int, increment: Int, moves: Int): Int {
         val pos = (curr + (moves - increment) - iterator + 1)
-        return if ((curr - iterator).row() == pos.row()) pos else -1
+        return if ((curr - iterator).row() == pos.row() && (curr - iterator) >= 0) pos else -1
     }
 
     private fun Int.row() = this / colNum
