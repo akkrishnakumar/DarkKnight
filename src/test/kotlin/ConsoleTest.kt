@@ -11,7 +11,7 @@ class ConsoleTest {
     internal fun `should print possible positions of given piece on console`() {
         val expected = "E5, E6, D6, C6, C5, C4, D4, E4"
         val input = "King D5"
-        val consoleApp = ConsoleApp({ input }, { console.push(it) })
+        val consoleApp = ConsoleApp({ input }, { console.push(it.checkForBlank()) })
 
         consoleApp()
         val actual = console.pop()
@@ -23,7 +23,7 @@ class ConsoleTest {
     internal fun `should print error message when invalid input was entered on the console`() {
         val expected = "Invalid Input: Duke A0"
         val input = "Duke A0"
-        val consoleApp = ConsoleApp({ input }, { console.push(it) })
+        val consoleApp = ConsoleApp({ input }, { console.push(it.checkForBlank()) })
 
         consoleApp()
         val actual = console.pop()
@@ -35,11 +35,13 @@ class ConsoleTest {
     internal fun `should print 'No possible moves' when no possible moves are found for a piece`() {
         val expected = "No possible moves"
         val input = "Queen A0"
-        val consoleApp = ConsoleApp({ input }, { console.push(it) })
+        val consoleApp = ConsoleApp({ input }, { console.push(it.checkForBlank()) })
 
         consoleApp()
         val actual = console.pop()
 
         assertThat(actual, equalTo(expected))
     }
+
+    private fun String.checkForBlank() = if (this.isBlank()) "No possible moves" else this
 }

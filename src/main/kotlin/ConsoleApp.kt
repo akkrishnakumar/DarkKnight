@@ -23,6 +23,6 @@ private fun readInput(): String {
 }
 
 private fun printOutput(value: String) {
-    println(value)
+    println(if (value.isBlank()) "No possible moves" else value)
     println(":::::Thank You:::::")
 }
