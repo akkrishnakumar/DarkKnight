@@ -1,5 +1,4 @@
 import com.natpryce.hamkrest.assertion.assertThat
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments.of
 import org.junit.jupiter.params.provider.MethodSource
@@ -43,13 +42,10 @@ class GameLogicTest {
         assertThat(actual, containsAllOf(expected))
     }
 
-    @Test
-    internal fun `should return possible moves for Pawn`() {
-        val expected = listOf("E5")
-        val input = Pawn("D5")
-
+    @ParameterizedTest
+    @MethodSource("possibleOutcomesForPawn")
+    internal fun `should return possible moves for Pawn`(input: Piece, expected: List<String>) {
         val actual = gameLogic(input)
-
         assertThat(actual, containsAllOf(expected))
     }
 
@@ -179,6 +175,15 @@ class GameLogicTest {
                     "H1", "H2", "H3", "H4", "H5", "H6", "H7",
                 )
             )
+        )
+
+        @JvmStatic
+        fun possibleOutcomesForPawn() = listOf(
+            of(Pawn("A1"), listOf("B1")),
+            of(Pawn("A8"), listOf("B8")),
+            of(Pawn("D5"), listOf("E5")),
+            of(Pawn("H1"), emptyList<String>()),
+            of(Pawn("H8"), emptyList<String>()),
         )
 
     }
